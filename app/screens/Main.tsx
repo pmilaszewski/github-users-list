@@ -1,5 +1,5 @@
-import { View, Text } from 'react-native'
-import { Button } from '@/app/components'
+import { View } from 'react-native'
+import { Button, Input } from '@/app/components'
 
 export const Main = () => {
   const onSearchPress = () => {
@@ -8,7 +8,7 @@ export const Main = () => {
 
   return (
     <View>
-      <Text>Main screen here we go</Text>
+      {/* <Input /> */}
       <Button text="Search" onPress={onSearchPress} />
     </View>
   )
