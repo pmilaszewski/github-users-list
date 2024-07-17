@@ -9,7 +9,7 @@
     "web": "expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint",
-    "prettier": " prettier . --write"
+    "prettier": "prettier . --write"
   },
   "jest": {
     "preset": "jest-expo"
@@ -23,6 +23,7 @@
     "expo-router": "~3.5.18",
     "expo-splash-screen": "~0.27.5",
     "expo-status-bar": "~1.12.1",
+    "husky": "^9.0.11",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.74.3",
@@ -44,5 +45,10 @@
     "react-test-renderer": "18.2.0",
     "typescript": "~5.3.3"
   },
-  "private": true
+  "private": true,
+  "husky": {
+    "hooks": {
+      "pre-commit": "prettier --write . && expo lint && git add -A ."
+    }
+  }
 }
