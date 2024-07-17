@@ -27,7 +27,8 @@ export default function RootLayout() {
 
   return (
     <SafeAreaView>
-      <StatusBar style="dark" /><Main />
+      <StatusBar style="dark" />
+      <Main />
     </SafeAreaView>
   )
 }
