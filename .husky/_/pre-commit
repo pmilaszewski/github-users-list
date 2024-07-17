@@ -1,4 +1,0 @@
-#!/usr/bin/env sh
-yarn prettier
-yarn lint
-git add .
