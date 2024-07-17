@@ -5,7 +5,7 @@ import { styles } from './Input.styles'
 export const Input = () => {
 
   return (
-    <View>
+    <View style={styles.container}>
       <TextInput />
       <Text>Test text</Text>
     </View>
