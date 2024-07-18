@@ -12,4 +12,13 @@ export const styles = StyleSheet.create({
     marginBottom: 16,
     fontSize: 16,
   },
+  icon: {
+    color: Colors.icon,
+  },
+  iconContainer: {
+    position: 'absolute',
+    right: 0,
+    top: 4,
+    padding: 12,
+  },
 })
