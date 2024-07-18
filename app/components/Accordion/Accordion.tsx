@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from 'react-native'
+import { View, Text, Pressable, Image } from 'react-native'
 import { AntDesign, FontAwesome } from '@expo/vector-icons'
 import Animated, {
   useSharedValue,
@@ -21,6 +21,7 @@ export type AccordionProps = {
   item: {
     id: string
     username: string
+    imageUrl: string
     repos?: RepoItemProps[]
   }
 }
@@ -82,8 +83,10 @@ export const Accordion = ({ item }: AccordionProps) => {
         onPress={handleOnPressItem}
         pointerEvents={item.repos?.length ? 'auto' : 'none'}
       >
-        {/* <Image /> */}
-        <Text style={styles.text}>{item.username}</Text>
+        <View style={styles.subcontainer}>
+          <Image source={{ uri: item.imageUrl }} style={styles.image} />
+          <Text style={styles.text}>{item.username}</Text>
+        </View>
         {item.repos?.length ? (
           <Animated.View style={animatedContainerStyle}>
             <AntDesign name="down" size={16} style={styles.icon} />

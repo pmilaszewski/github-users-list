@@ -12,6 +12,10 @@ export const styles = StyleSheet.create({
     marginBottom: 12,
     flexDirection: 'row',
   },
+  subcontainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   text: {
     fontSize: 16,
   },
@@ -45,5 +49,14 @@ export const styles = StyleSheet.create({
     display: 'flex',
     position: 'absolute',
     width: '100%',
+  },
+  image: {
+    height: 24,
+    width: 24,
+    borderRadius: 100,
+    borderWidth: 2,
+    borderColor: Colors.buttonBackground,
+    backgroundColor: Colors.inputBackground,
+    marginRight: 8,
   },
 })

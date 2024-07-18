@@ -43,6 +43,7 @@ export const getUserList = async (q: string, setLoading: (value: boolean) => voi
           return {
             id: item.id,
             username: item.login,
+            imageUrl: item.avatar_url,
             repos,
           }
         }),
