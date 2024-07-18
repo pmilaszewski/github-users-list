@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from 'react'
+import { useEffect, useCallback, useContext } from 'react'
 import { View, Text, Pressable } from 'react-native'
 import { AntDesign, FontAwesome } from '@expo/vector-icons'
 import Animated, {
@@ -9,6 +9,7 @@ import Animated, {
   useDerivedValue,
 } from 'react-native-reanimated'
 import { styles } from './Accordion.styles'
+import { AccordionContext } from '@/context'
 
 export type RepoItemProps = {
   id: string
@@ -18,8 +19,6 @@ export type RepoItemProps = {
 }
 
 export type AccordionProps = {
-  expanded: string
-  setExpanded: (value: string) => void
   item: {
     id: string
     username: string
@@ -29,7 +28,15 @@ export type AccordionProps = {
 
 const AnimatedIcon = Animated.createAnimatedComponent(AntDesign)
 
-export const Accordion = ({ item, expanded, setExpanded }: AccordionProps) => {
+export const Accordion = ({ item }: AccordionProps) => {
+  const context = useContext(AccordionContext)
+
+  if (context === null) {
+    console.warn('Context is null!')
+    return <View />
+  }
+  const { expanded, setExpanded } = context
+
   const rotation = useSharedValue(0)
   const height = useSharedValue(0)
 

@@ -10,14 +10,15 @@ import {
   EmptyListComponent,
 } from '@/app/components'
 import { getUserList } from '@/utils/api'
+import { AccordionContext } from '@/context'
 
 type Input = {
   searchText: string
 }
 
 export const Main = () => {
-  const [submittedText, setSubmittedText] = useState('')
   const [expanded, setExpanded] = useState('')
+  const [submittedText, setSubmittedText] = useState('')
   const [data, setData] = useState<AccordionProps['item'][]>([])
   const [loading, setLoading] = useState(false)
 
@@ -32,7 +33,7 @@ export const Main = () => {
   }
 
   const renderItem: ListRenderItem<AccordionProps['item']> = ({ item }) => {
-    return <Accordion key={item.id} item={item} expanded={expanded} setExpanded={setExpanded} />
+    return <Accordion key={item.id} item={item} />
   }
 
   const onClearData = () => {
@@ -42,17 +43,19 @@ export const Main = () => {
 
   return (
     <View style={{ flex: 1 }}>
-      <FormProvider {...methods}>
-        <Input />
-        <Button text="Search" onPress={handleSubmit(onSearchPress)} loading={loading} />
-        {submittedText && <HelperText text={submittedText} onClear={onClearData} />}
-        <FlatList
-          data={data}
-          renderItem={renderItem}
-          ListEmptyComponent={EmptyListComponent}
-          style={{ paddingRight: 16, marginRight: -16 }}
-        />
-      </FormProvider>
+      <AccordionContext.Provider value={{ expanded, setExpanded }}>
+        <FormProvider {...methods}>
+          <Input />
+          <Button text="Search" onPress={handleSubmit(onSearchPress)} loading={loading} />
+          {submittedText && <HelperText text={submittedText} onClear={onClearData} />}
+          <FlatList
+            data={data}
+            renderItem={renderItem}
+            ListEmptyComponent={EmptyListComponent}
+            style={{ paddingRight: 16, marginRight: -16 }}
+          />
+        </FormProvider>
+      </AccordionContext.Provider>
     </View>
   )
 }
