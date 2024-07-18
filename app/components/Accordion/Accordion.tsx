@@ -1,15 +1,14 @@
-import { useEffect, useCallback, useContext } from 'react'
 import { View, Text, Pressable } from 'react-native'
 import { AntDesign, FontAwesome } from '@expo/vector-icons'
 import Animated, {
   useSharedValue,
   withTiming,
   useAnimatedStyle,
-  interpolate,
   useDerivedValue,
 } from 'react-native-reanimated'
 import { styles } from './Accordion.styles'
-import { AccordionContext } from '@/context'
+import { useAtom } from 'jotai'
+import { expandedAtom } from '@/state'
 
 export type RepoItemProps = {
   id: string
@@ -26,38 +25,24 @@ export type AccordionProps = {
   }
 }
 
-const AnimatedIcon = Animated.createAnimatedComponent(AntDesign)
-
 export const Accordion = ({ item }: AccordionProps) => {
-  const context = useContext(AccordionContext)
-
-  if (context === null) {
-    console.warn('Context is null!')
-    return <View />
-  }
-  const { expanded, setExpanded } = context
-
-  const rotation = useSharedValue(0)
+  const [expanded, setExpanded] = useAtom(expandedAtom)
   const height = useSharedValue(0)
 
   const isCurrentItemExpanded = item.id === expanded
-
-  const handleItemRotation = useCallback((isCurrentItemExpanded: boolean) => {
-    if (isCurrentItemExpanded) {
-      rotation.value = withTiming(1, { duration: 500 })
-    } else {
-      rotation.value = withTiming(0, { duration: 500 })
-    }
-  }, [])
 
   const derivedHeight = useDerivedValue(() =>
     withTiming(height.value * Number(isCurrentItemExpanded), { duration: 500 }),
   )
 
+  const derivedRotation = useDerivedValue(() =>
+    withTiming(isCurrentItemExpanded ? '180deg' : '0deg', { duration: 500 }),
+  )
+
   const animatedContainerStyle = useAnimatedStyle(() => ({
     transform: [
       {
-        rotate: `${interpolate(rotation.value, [0, 1], [0, 180])}deg`,
+        rotate: derivedRotation.value,
       },
     ],
   }))
@@ -74,10 +59,6 @@ export const Accordion = ({ item }: AccordionProps) => {
       setExpanded(item.id)
     }
   }
-
-  useEffect(() => {
-    handleItemRotation(isCurrentItemExpanded)
-  }, [handleItemRotation, isCurrentItemExpanded])
 
   const renderRepoItem = (item: RepoItemProps) => {
     return (
@@ -101,9 +82,12 @@ export const Accordion = ({ item }: AccordionProps) => {
         onPress={handleOnPressItem}
         pointerEvents={item.repos?.length ? 'auto' : 'none'}
       >
+        {/* <Image /> */}
         <Text style={styles.text}>{item.username}</Text>
         {item.repos?.length ? (
-          <AnimatedIcon name="down" size={16} style={[styles.icon, animatedContainerStyle]} />
+          <Animated.View style={animatedContainerStyle}>
+            <AntDesign name="down" size={16} style={styles.icon} />
+          </Animated.View>
         ) : null}
       </Pressable>
       <Animated.View style={animatedRepoListStyle}>
