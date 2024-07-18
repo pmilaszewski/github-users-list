@@ -5,8 +5,9 @@ export const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.buttonBackground,
     borderRadius: 4,
-    paddingVertical: 12,
+    height: 48,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   text: {
     color: Colors.buttonText,

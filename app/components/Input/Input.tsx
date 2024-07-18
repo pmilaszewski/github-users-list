@@ -1,13 +1,20 @@
-import { TextInput, View, Text } from 'react-native'
+import { TextInput } from 'react-native'
 import { styles } from './Input.styles'
 
-// in-progress
-export const Input = () => {
+type InputProps = {
+  searchText: string
+  setSearchText: (value: string) => void
+}
 
+const INPUT_PLACEHOLDER = 'Enter username'
+
+export const Input = ({ searchText, setSearchText }: InputProps) => {
   return (
-    <View style={styles.container}>
-      <TextInput />
-      <Text>Test text</Text>
-    </View>
+    <TextInput
+      value={searchText}
+      onChangeText={setSearchText}
+      placeholder={INPUT_PLACEHOLDER}
+      style={styles.input}
+    />
   )
 }

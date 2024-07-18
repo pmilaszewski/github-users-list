@@ -8,4 +8,6 @@ export const Colors = {
   buttonBackground: 'rgba(89,149,216,1)',
   buttonText: white,
   icon: black,
+  inputBackground: 'rgba(242,242,242,1)',
+  inputBorder: 'rgba(229,229,229,1)',
 }
