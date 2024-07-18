@@ -6,9 +6,5 @@ type LayoutProps = {
 }
 
 export const Layout = ({ children }: LayoutProps) => {
-  return (
-    <View style={styles.container}>
-      {children}
-    </View>
-  )
+  return <View style={styles.container}>{children}</View>
 }

@@ -13,4 +13,8 @@ export const styles = StyleSheet.create({
     color: Colors.buttonText,
     fontSize: 16,
   },
+  loader: {
+    color: '#fff',
+    justifyContent: 'center',
+  },
 })

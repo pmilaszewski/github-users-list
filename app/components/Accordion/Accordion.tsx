@@ -10,7 +10,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import { styles } from './Accordion.styles'
 
-type RepoItemProps = {
+export type RepoItemProps = {
   id: string
   title: string
   description: string
@@ -23,7 +23,7 @@ export type AccordionProps = {
   item: {
     id: string
     username: string
-    repos: RepoItemProps[]
+    repos?: RepoItemProps[]
   }
 }
 
@@ -35,13 +35,13 @@ export const Accordion = ({ item, expanded, setExpanded }: AccordionProps) => {
 
   const isCurrentItemExpanded = item.id === expanded
 
-  const handleItemRotation = useCallback(() => {
+  const handleItemRotation = useCallback((isCurrentItemExpanded: boolean) => {
     if (isCurrentItemExpanded) {
       rotation.value = withTiming(1, { duration: 500 })
     } else {
       rotation.value = withTiming(0, { duration: 500 })
     }
-  }, [isCurrentItemExpanded])
+  }, [])
 
   const derivedHeight = useDerivedValue(() =>
     withTiming(height.value * Number(isCurrentItemExpanded), { duration: 500 }),
@@ -69,12 +69,12 @@ export const Accordion = ({ item, expanded, setExpanded }: AccordionProps) => {
   }
 
   useEffect(() => {
-    handleItemRotation()
-  }, [handleItemRotation])
+    handleItemRotation(isCurrentItemExpanded)
+  }, [handleItemRotation, isCurrentItemExpanded])
 
   const renderRepoItem = (item: RepoItemProps) => {
     return (
-      <View style={styles.itemContainer}>
+      <View style={styles.itemContainer} key={item.id}>
         <View style={styles.itemTitleContainer}>
           <Text style={styles.itemTitle}>{item.title}</Text>
           <View style={styles.itemStarContainer}>
@@ -92,10 +92,10 @@ export const Accordion = ({ item, expanded, setExpanded }: AccordionProps) => {
       <Pressable
         style={styles.container}
         onPress={handleOnPressItem}
-        pointerEvents={item.repos.length ? 'auto' : 'none'}
+        pointerEvents={item.repos?.length ? 'auto' : 'none'}
       >
         <Text style={styles.text}>{item.username}</Text>
-        {item.repos.length ? (
+        {item.repos?.length ? (
           <AnimatedIcon name="down" size={16} style={[styles.icon, animatedContainerStyle]} />
         ) : null}
       </Pressable>
@@ -106,7 +106,7 @@ export const Accordion = ({ item, expanded, setExpanded }: AccordionProps) => {
             height.value = e.nativeEvent.layout.height
           }}
         >
-          {item.repos.map(renderRepoItem)}
+          {item.repos?.map(renderRepoItem)}
         </View>
       </Animated.View>
     </Animated.View>
