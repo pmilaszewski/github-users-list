@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { View, FlatList, ListRenderItem } from 'react-native'
+import { useForm, FormProvider } from 'react-hook-form'
 import {
   Button,
   Input,
@@ -10,18 +11,24 @@ import {
 } from '@/app/components'
 import { getUserList } from '@/utils/api'
 
+type Input = {
+  searchText: string
+}
+
 export const Main = () => {
-  const [searchText, setSearchText] = useState('')
   const [submittedText, setSubmittedText] = useState('')
   const [expanded, setExpanded] = useState('')
   const [data, setData] = useState<AccordionProps['item'][]>([])
   const [loading, setLoading] = useState(false)
 
-  const onSearchPress = async () => {
+  const methods = useForm<Input>()
+  const { setValue, handleSubmit } = methods
+
+  const onSearchPress = async ({ searchText }: { searchText: string }) => {
     const result = await getUserList(searchText, setLoading)
     setData(result)
     setSubmittedText(searchText)
-    setSearchText('')
+    setValue('searchText', '', { shouldValidate: true })
   }
 
   const renderItem: ListRenderItem<AccordionProps['item']> = ({ item }) => {
@@ -35,15 +42,17 @@ export const Main = () => {
 
   return (
     <View style={{ flex: 1 }}>
-      <Input searchText={searchText} setSearchText={setSearchText} />
-      <Button text="Search" onPress={onSearchPress} loading={loading} />
-      {submittedText && <HelperText text={submittedText} onClear={onClearData} />}
-      <FlatList
-        data={data}
-        renderItem={renderItem}
-        ListEmptyComponent={EmptyListComponent}
-        style={{ paddingRight: 16, marginRight: -16 }}
-      />
+      <FormProvider {...methods}>
+        <Input />
+        <Button text="Search" onPress={handleSubmit(onSearchPress)} loading={loading} />
+        {submittedText && <HelperText text={submittedText} onClear={onClearData} />}
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          ListEmptyComponent={EmptyListComponent}
+          style={{ paddingRight: 16, marginRight: -16 }}
+        />
+      </FormProvider>
     </View>
   )
 }

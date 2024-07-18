@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from 'react'
 import { View, Text, Pressable } from 'react-native'
-import { AntDesign } from '@expo/vector-icons'
+import { AntDesign, FontAwesome } from '@expo/vector-icons'
 import Animated, {
   useSharedValue,
   withTiming,
@@ -79,7 +79,7 @@ export const Accordion = ({ item, expanded, setExpanded }: AccordionProps) => {
           <Text style={styles.itemTitle}>{item.title}</Text>
           <View style={styles.itemStarContainer}>
             <Text style={[styles.itemTitle, { marginRight: 8 }]}>{item.stars}</Text>
-            <AntDesign name="star" size={16} style={styles.icon} />
+            <FontAwesome name="star" size={16} style={styles.icon} />
           </View>
         </View>
         <Text style={styles.itemDescription}>{item.description}</Text>
