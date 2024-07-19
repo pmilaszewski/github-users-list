@@ -2,7 +2,11 @@
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
+Node version: 20.15.1
+
 ## Get started
+
+WEB VERSION IS NOT SUPPORTED
 
 1. Install dependencies
 

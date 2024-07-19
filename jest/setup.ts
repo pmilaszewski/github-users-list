@@ -5,3 +5,5 @@ jest.mock('@expo/vector-icons', () => ({
   AntDesign: '',
   FontAwesome: '',
 }))
+
+jest.mock('axios')

@@ -9,7 +9,7 @@ import {
   AccordionProps,
   EmptyListComponent,
 } from '@/app/components'
-import { getUserList } from '@/utils/api'
+import { useApi } from '@/utils/api'
 import { useSetAtom } from 'jotai'
 import { expandedAtom } from '@/state'
 
@@ -18,6 +18,7 @@ type Input = {
 }
 
 export const Main = () => {
+  const { getUserList } = useApi()
   const setExpanded = useSetAtom(expandedAtom)
   const [submittedText, setSubmittedText] = useState('')
   const [data, setData] = useState<AccordionProps['item'][]>([])
