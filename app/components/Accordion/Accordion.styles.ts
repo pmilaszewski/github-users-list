@@ -55,7 +55,7 @@ export const styles = StyleSheet.create({
     width: 24,
     borderRadius: 100,
     borderWidth: 2,
-    borderColor: Colors.buttonBackground,
+    borderColor: Colors.blue,
     backgroundColor: Colors.inputBackground,
     marginRight: 8,
   },

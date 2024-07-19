@@ -1,6 +1,7 @@
 import { TouchableOpacity, Text, ActivityIndicator } from 'react-native'
 import { useFormContext } from 'react-hook-form'
 import { styles } from './Button.styles'
+import { Colors } from 'react-native/Libraries/NewAppScreen'
 
 export type ButtonProps = {
   text: string
@@ -21,7 +22,11 @@ export const Button = ({ text, loading, onPress }: ButtonProps) => {
       testID="button"
     >
       <Text style={styles.text}>
-        {loading ? <ActivityIndicator animating color="#fff" testID="button-loader" /> : text}
+        {loading ? (
+          <ActivityIndicator animating color={Colors.white} testID="button-loader" />
+        ) : (
+          text
+        )}
       </Text>
     </TouchableOpacity>
   )

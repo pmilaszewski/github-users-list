@@ -8,6 +8,7 @@ import {
   Accordion,
   AccordionProps,
   EmptyListComponent,
+  Toast,
 } from '@/app/components'
 import { useApi } from '@/utils/api'
 import { useSetAtom } from 'jotai'
@@ -18,7 +19,7 @@ type Input = {
 }
 
 export const Main = () => {
-  const { getUserList } = useApi()
+  const { getUserList, error } = useApi()
   const setExpanded = useSetAtom(expandedAtom)
   const [submittedText, setSubmittedText] = useState('')
   const [data, setData] = useState<AccordionProps['item'][]>([])
@@ -57,6 +58,7 @@ export const Main = () => {
           style={{ paddingRight: 16, marginRight: -16 }}
         />
       </FormProvider>
+      {error && <Toast text={error} />}
     </View>
   )
 }

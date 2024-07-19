@@ -25,6 +25,6 @@ export const styles = StyleSheet.create({
   },
   clearButtonText: {
     ...text,
-    color: Colors.buttonBackground,
+    color: Colors.blue,
   },
 })

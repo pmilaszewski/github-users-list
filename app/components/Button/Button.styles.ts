@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     fontSize: 16,
   },
   loader: {
-    color: '#fff',
+    color: Colors.white,
     justifyContent: 'center',
   },
 })

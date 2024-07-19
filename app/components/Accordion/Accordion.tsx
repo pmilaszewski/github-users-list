@@ -9,6 +9,7 @@ import Animated, {
 import { styles } from './Accordion.styles'
 import { useAtom } from 'jotai'
 import { expandedAtom } from '@/state'
+import { animationDuration } from '@/constants/durations'
 
 export type RepoItemProps = {
   id: string
@@ -33,11 +34,11 @@ export const Accordion = ({ item }: AccordionProps) => {
   const isCurrentItemExpanded = item.id === expanded
 
   const derivedHeight = useDerivedValue(() =>
-    withTiming(height.value * Number(isCurrentItemExpanded), { duration: 500 }),
+    withTiming(height.value * Number(isCurrentItemExpanded), { duration: animationDuration }),
   )
 
   const derivedRotation = useDerivedValue(() =>
-    withTiming(isCurrentItemExpanded ? '180deg' : '0deg', { duration: 500 }),
+    withTiming(isCurrentItemExpanded ? '180deg' : '0deg', { duration: animationDuration }),
   )
 
   const animatedContainerStyle = useAnimatedStyle(() => ({

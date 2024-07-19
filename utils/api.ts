@@ -1,15 +1,20 @@
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { headers } from '@/constants/axios'
+import { errorCleanupDuration } from '@/constants/durations'
 
 export const GET_USERS_LIST_URL = 'https://api.github.com/search/users'
 
 export const useApi = () => {
+  const [error, setError] = useState('')
+
   const getReposForUser = async (url: string) => {
     try {
       const response = await axios.get(url, { headers })
 
       return response.data
     } catch (e) {
+      setError('Error with fetching repos')
       console.warn(e)
       return []
     }
@@ -52,6 +57,7 @@ export const useApi = () => {
         return users
       })
       .catch((e) => {
+        setError('Error with fetching users')
         console.warn(e)
         return []
       })
@@ -60,7 +66,14 @@ export const useApi = () => {
       })
   }
 
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => setError(''), errorCleanupDuration)
+    }
+  }, [error])
+
   return {
     getUserList,
+    error,
   }
 }
