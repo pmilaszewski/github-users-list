@@ -7,8 +7,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "jest --watchAll",
-    "lint": "expo lint",
+    "test": "jest --config ./jest.config.js",
+    "lint": "eslint",
     "prettier": "prettier . --write",
     "prepare": "husky"
   },
@@ -37,13 +37,17 @@
     "@babel/core": "^7.20.0",
     "@babel/eslint-parser": "^7.24.8",
     "@eslint/compat": "^1.1.1",
+    "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.7.0",
+    "@testing-library/jest-native": "^5.4.3",
+    "@testing-library/react-native": "^12.5.1",
     "@types/jest": "^29.5.12",
     "@types/react": "~18.2.45",
     "@types/react-test-renderer": "^18.0.7",
-    "eslint": "9.x",
+    "eslint": "^8.57.0",
     "eslint-config-expo": "^7.0.0",
     "eslint-plugin-react": "^7.34.4",
+    "eslint-plugin-testing-library": "^6.2.2",
     "globals": "^15.8.0",
     "husky": "^9.0.11",
     "jest": "^29.2.1",
@@ -59,6 +63,7 @@
     "*": [
       "prettier --write",
       "eslint",
+      "jest --config ./jest.config.js",
       "git add ."
     ]
   }

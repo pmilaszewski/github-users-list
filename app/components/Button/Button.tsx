@@ -20,7 +20,7 @@ export const Button = ({ text, loading, onPress }: ButtonProps) => {
       disabled={!isValid}
     >
       <Text style={styles.text}>
-        {loading ? <ActivityIndicator animating color="#fff" /> : text}
+        {loading ? <ActivityIndicator animating color="#fff" testID="button-loader" /> : text}
       </Text>
     </TouchableOpacity>
   )
