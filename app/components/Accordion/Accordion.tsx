@@ -65,13 +65,22 @@ export const Accordion = ({ item }: AccordionProps) => {
     return (
       <View style={styles.itemContainer} key={item.id}>
         <View style={styles.itemTitleContainer}>
-          <Text style={styles.itemTitle}>{item.title}</Text>
+          <Text style={styles.itemTitle} testID={`accordion-repo-title-${item.id}`}>
+            {item.title}
+          </Text>
           <View style={styles.itemStarContainer}>
-            <Text style={[styles.itemTitle, { marginRight: 8 }]}>{item.stars}</Text>
+            <Text
+              style={[styles.itemTitle, { marginRight: 8 }]}
+              testID={`accordion-repo-stars-${item.id}`}
+            >
+              {item.stars}
+            </Text>
             <FontAwesome name="star" size={16} style={styles.icon} />
           </View>
         </View>
-        <Text style={styles.itemDescription}>{item.description}</Text>
+        <Text style={styles.itemDescription} testID={`accordion-repo-description-${item.id}`}>
+          {item.description}
+        </Text>
       </View>
     )
   }
@@ -84,11 +93,13 @@ export const Accordion = ({ item }: AccordionProps) => {
         pointerEvents={item.repos?.length ? 'auto' : 'none'}
       >
         <View style={styles.subcontainer}>
-          <Image source={{ uri: item.imageUrl }} style={styles.image} />
-          <Text style={styles.text}>{item.username}</Text>
+          <Image source={{ uri: item.imageUrl }} style={styles.image} testID="accordion-image" />
+          <Text style={styles.text} testID="accordion-username">
+            {item.username}
+          </Text>
         </View>
         {item.repos?.length ? (
-          <Animated.View style={animatedContainerStyle}>
+          <Animated.View style={animatedContainerStyle} testID="accordion-chevron">
             <AntDesign name="down" size={16} style={styles.icon} />
           </Animated.View>
         ) : null}

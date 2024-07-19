@@ -12,9 +12,6 @@
     "prettier": "prettier . --write",
     "prepare": "husky"
   },
-  "jest": {
-    "preset": "jest-expo"
-  },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
     "axios": "^1.7.2",

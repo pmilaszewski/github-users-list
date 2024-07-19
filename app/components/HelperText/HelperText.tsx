@@ -1,7 +1,7 @@
 import { Text, View, TouchableOpacity } from 'react-native'
 import { styles } from './HelperText.styles'
 
-type HelperTextProps = {
+export type HelperTextProps = {
   text: string
   onClear: () => void
 }

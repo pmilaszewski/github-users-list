@@ -15,3 +15,23 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    ```bash
     yarn start
    ```
+
+## Using commands
+
+1. Running prettier
+
+   ```bash
+    yarn prettier
+   ```
+
+2. Running linter
+
+   ```bash
+    yarn lint
+   ```
+
+3. Running tests
+
+   ```bash
+    yarn test
+   ```

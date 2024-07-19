@@ -13,27 +13,26 @@ export const Input = () => {
   const searchText = watch('searchText')
 
   return (
-    <>
-      <Controller
-        name="searchText"
-        control={control}
-        rules={{ required: true }}
-        render={({ field: { onChange, value } }) => (
-          <>
-            <TextInput
-              value={value}
-              onChangeText={onChange}
-              placeholder={INPUT_PLACEHOLDER}
-              style={styles.input}
-            />
-            {searchText && (
-              <Pressable onPress={onClearText} style={styles.iconContainer}>
-                <MaterialIcons name="clear" size={16} style={styles.icon} />
-              </Pressable>
-            )}
-          </>
-        )}
-      />
-    </>
+    <Controller
+      name="searchText"
+      control={control}
+      rules={{ required: true }}
+      render={({ field: { onChange, value } }) => (
+        <>
+          <TextInput
+            testID="input"
+            value={value}
+            onChangeText={onChange}
+            placeholder={INPUT_PLACEHOLDER}
+            style={styles.input}
+          />
+          {searchText && (
+            <Pressable testID="input-clear" onPress={onClearText} style={styles.iconContainer}>
+              <MaterialIcons name="clear" size={16} style={styles.icon} />
+            </Pressable>
+          )}
+        </>
+      )}
+    />
   )
 }
