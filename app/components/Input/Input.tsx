@@ -5,7 +5,11 @@ import { styles } from './Input.styles'
 
 const INPUT_PLACEHOLDER = 'Enter username'
 
-export const Input = () => {
+type InputProps = {
+  onSubmit: () => void
+}
+
+export const Input = ({ onSubmit }: InputProps) => {
   const { setValue, watch, control } = useFormContext()
 
   const onClearText = () => setValue('searchText', '', { shouldValidate: true })
@@ -23,6 +27,7 @@ export const Input = () => {
             testID="input"
             value={value}
             onChangeText={onChange}
+            onSubmitEditing={onSubmit}
             placeholder={INPUT_PLACEHOLDER}
             style={styles.input}
           />

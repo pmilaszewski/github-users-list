@@ -5,6 +5,20 @@ import { errorCleanupDuration } from '@/constants/durations'
 
 export const GET_USERS_LIST_URL = 'https://api.github.com/search/users'
 
+type User = {
+  id: string
+  avatar_url: string
+  login: string
+  repos_url: string
+}
+
+type Repo = {
+  id: string
+  name: string
+  description: string
+  stargazers_count: number
+}
+
 export const useApi = () => {
   const [error, setError] = useState('')
 
@@ -32,14 +46,10 @@ export const useApi = () => {
       })
       .then(async (resp) => {
         const users = await Promise.all(
-          // item should be typed, cannot find proper types in github api docs
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          resp.data?.items.map(async (item: any) => {
+          resp.data?.items.map(async (item: User) => {
             const repositiories = await getReposForUser(item.repos_url)
 
-            // repo should be typed, cannot find proper types in github api docs
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const repos = repositiories?.map((repo: any) => ({
+            const repos = repositiories?.map((repo: Repo) => ({
               id: repo.id,
               title: repo.name ?? 'No title',
               description: repo.description ?? 'No description',

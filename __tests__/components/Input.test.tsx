@@ -4,12 +4,13 @@ import { FormProvider, useForm } from 'react-hook-form'
 
 const mockedText = 'Test text'
 const mockedSetValue = jest.fn()
+const mockedSubmit = jest.fn()
 
 const Component = () => {
   const methods = useForm()
   return (
     <FormProvider {...methods} setValue={mockedSetValue}>
-      <Input />
+      <Input onSubmit={mockedSubmit} />
     </FormProvider>
   )
 }

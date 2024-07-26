@@ -48,7 +48,7 @@ export const Main = () => {
   return (
     <View style={{ flex: 1 }}>
       <FormProvider {...methods}>
-        <Input />
+        <Input onSubmit={handleSubmit(onSearchPress)} />
         <Button text="Search" onPress={handleSubmit(onSearchPress)} loading={loading} />
         {submittedText && <HelperText text={submittedText} onClear={onClearData} />}
         <FlatList
